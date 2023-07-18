@@ -1,0 +1,8 @@
+Имя:
+{{ contact_name }}
+
+Email:
+{{ contact_email }}
+
+Сообщение:
+{{ contact_content }}

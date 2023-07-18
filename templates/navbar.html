@@ -1,0 +1,101 @@
+
+    {% load static %}
+{% block navbar %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+<button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+
+      <a class="navbar-brand" href="#">
+        <strong>Ara Chef</strong>
+      </a>
+       <!-- -----------------------links ----------------------------->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left links -------------------------------------->
+        <ul class="navbar-nav mr-auto">
+            {% url 'index' as index %}
+            {% url 'products:list' as page2 %}
+            {% url 'page3' as page3 %}
+            {% url 'page4' as page4 %}
+            {% url 'cart:cart_detail' as cart_detail %}
+          <li class="nav-item {% if request.path == index %} active {% endif %}">
+            <a class="nav-link" href="{% url 'index'%}">Main
+            </a>
+          </li>
+          <li class="nav-item {% if request.path == page2 %} active {% endif %}">
+            <a class="nav-link" href="{% url 'products:list'%}" >Products</a>
+
+          </li>
+          <li class="nav-item {% if request.path == page3 %} active {% endif %}">
+            <a class="nav-link" href="{% url 'page3'%}" >Contacts</a>
+          </li>
+            <li class="nav-item {% if request.path == cart_detail %} active {% endif %}">
+                <a href="{% url 'cart:cart_detail' %}"class="nav-link" id="popcart">
+                    <i class="fas fa-cart-plus"></i>
+                        Cart
+                    </a>
+            </li>
+
+
+        </ul>
+        <!-- ------------------------------------Right links-->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a href="https://vk.com/dreamwalker19" class="nav-link" target="_blank">
+              <i class="fab fa-vk"></i>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a href="#" class="nav-link" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+            {% if user.username %}
+    <li class="nav-item">
+            <a href="{% url 'logout' %}" class="nav-link border border-light rounded">
+              <i class="fab fa-github mr-2"></i>Exit
+            </a>
+          </li>
+    {% else %}
+                <li class="nav-item">
+            <a href="{% url 'login' %}" class="nav-link border border-light rounded">
+              <i class="fab fa-github mr-2"></i>Login
+            </a>
+          </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+            <a href="{% url 'register' %}" class="nav-link border border-light rounded">
+              <i class="fab fa-github mr-2"></i>Reg
+            </a>
+          </li>
+                    {% endif %}
+{% endif %}
+
+
+{% if user.is_authenticated %}
+    <li class="nav-item">
+            <a href="{% url 'profile' %}" class="nav-link border border-light rounded">
+              <i class="fab fa-github mr-2"></i>Welcome, {{ user.username }}.
+            </a>
+<img src="{{ user.account.account_img.url }}" style="border-radius: 50%; width: 50px; height: 50px; transform: translate(200px, -50px); position: fixed">
+    </li>
+
+{% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+{% block header %}
+    {% include 'header.html'%}
+{% endblock header%}
+    <title></title></head>
+
+<body style="background-color: #CECCDA;" class="text-secondary ">
+        {% include 'navbar.html'%}
+
+
+        {% block content %}
+
+        {% endblock content%}
+
+    {% include 'footer.html'%}
+
+    {% include 'windowed_policy/privacy_policy.html' %}
+
+</body>
+</html>

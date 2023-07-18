@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'header.html' %}
+       <!--========================================================Full Page -->
+<div class="view " style="background-image: url({% static 'fastfood.jpg' %}); background-repeat: no-repeat; background-size: cover; ">
+<div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+          <div class="text-center white-text mx-5 wow zoomInDown ">
+            <h1 class="mb-4 ">
+              <strong>Welcome to Ara Chef Restaurant!</strong>
+            </h1>
+            <p>
+              <strong>A hungry belly has no ears.</strong>
+            </p>
+
+            <a  href="{% url 'products:list' %}" class="btn btn-outline-white ">Food Here!
+              <i class="fas fa-money-bill-wave" ml-2></i>
+            </a>
+          </div>
+        </div>
+</div>
+  <!--Main layout-->
+  <!--================================================================Footer====================================================================================-->
+{% endblock %}

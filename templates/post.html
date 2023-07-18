@@ -1,0 +1,27 @@
+<h1>Posts </h1>
+
+<ul>
+    {% for post in products %}
+        <li>
+            {{ post }}
+        </li>
+    {% endfor %}
+</ul>
+
+{% if products.paginator.num_pages > 1 %}
+
+    {% if products.has_previous %}
+
+        <a href="?page={{ products.previous_page_number }}">previous</a>
+
+    {% endif %}
+
+    <span>Page {{ products.number }} of {{ products.paginator.num_pages }}</span>
+
+    {% if products.has_next %}
+
+        <a href="?page={{ products.next_page_number }}">next</a>
+
+    {% endif %}
+
+{% endif %}

@@ -1,0 +1,9 @@
+{% load widget_tweaks %}
+<form action="{% url "cart:cart_add" product.id %}" method="post" >
+                    {% csrf_token %}
+                   {% render_field cart_product_form.quantity class="browser-default custom-select w-auto"  %}
+            <button class="btn btn-primary btn-md my-0 p">
+                Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </button>
+                  </form>

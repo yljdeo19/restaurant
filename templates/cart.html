@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% include 'header.html' %}
+  <main style="color:grey">
+    <div class="container m-t-100 m-b-100" style="background-color: white; border-radius: 20px; text-decoration-color: black">
+
+    <div class="table-responsive text-nowrap p-t-30">
+    <h2>Cart</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name of Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+                    {% with product=item.product  %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+                 <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {% csrf_token %}
+
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.update }}
+                     <button type="submit" value="Update" class="btn btn-primary btn-rounded" style="padding: 10px">Update</button>
+                                </form>
+              
+            </td>
+            <td>
+
+                {{ item.total_price }}₸
+            <a style='color: red;' href="{% url "cart:cart_remove" product.id %}">
+                <i class="fas fa-trash float-right"></i>
+            </a>
+            </td>
+        </tr>
+        {% endwith %}
+
+
+
+            {% empty %}
+            <tr>
+			<td colspan="5">Your cart is empty</td>
+          </tr>
+{% endfor %}
+             {% if cart|length > 0 %}
+                <tr>
+            <td colspan="4"><b>Total sum</b></td>
+            <td><b>{{ cart.get_total_price }}₸</b></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-warning float-right ml-2' href='{% url "orders:order_create" %}'>Proceed</a>
+            <a class='btn btn-primary float-right' href='{% url "products:list" %}'>Continue shopping</a>
+            </td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    </div>
+
+    </div>
+  </main>
+
+{% endblock content %}
