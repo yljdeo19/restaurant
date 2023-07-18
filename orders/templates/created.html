@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Thanks for ordering{% endblock %}
+
+{% block content %}
+    <main style="color: grey; padding-top: 100px">
+    <div class="container m-b-100 p-b-200 m-l-5">
+        <h1>Thanks for delivering</h1>
+    <p>Your order has been successfully completed. Your order number is
+        <strong>{{ order.id }}</strong>.</p>
+
+
+    </div>
+    </main>
+     <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+<!-- jQuery !-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    {% endblock %}
