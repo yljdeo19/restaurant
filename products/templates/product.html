@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+    {% load widget_tweaks%}
+    <p class="h4 mb-4 p-t-100 " style="color: #0b51c5; text-align: center">ADD Product</p>
+    <form class="text-center border border-light p-5 wow fadeIn "method="POST" enctype="multipart/form-data" style="">
+    {% csrf_token %}
+        <div class="form-group" >
+                {% render_field form.category class="form-control mb-4"  %}
+
+    </div>
+
+
+    <div class="form-group">
+             {{ form.name }}
+
+    </div>
+
+
+
+        <div class="form-group green-border-focus">
+      {{ form.description }}
+
+</div>
+        <div class="form-group" style="">
+    <!-- Subject -->
+        {{ form.price }}
+    </div>
+        <div class="form-control mb-4">
+ <div class="form-group">
+      <div style="display: none">
+   {{ form.image}}
+      </div>
+      <label for="acc">
+          <div class="btn btn-rounded purple-gradient btn-sm float-left btn-block" style="transform: translate(-636px,-3px)">
+      <span style="text-align: left">Choose Image</span>
+    </div>
+          <h5 style="transform: translate(-450px,-40px)">Product Image </h5>
+      </label>
+  </div>
+        </div>
+
+
+    <!-- Send button -->
+    <button class="btn btn-info btn-block" type="submit">Save</button>
+</form>
+ {% endblock %}

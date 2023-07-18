@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!--Main layout-->
+{% block content %}
+    <head>
+        <style>
+            .view-overlay{
+	    position: relative;
+                overflow: hidden;
+	    width: 250px;
+	    height: 250px;
+
+}
+.view-overlay img{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+}
+        </style>
+    </head>
+    {% include 'header.html' %}
+  <main>
+    <div class="container" style="padding-top: 60px">
+
+      <!--Navbar2-->
+      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="">
+
+        <!-- --------------------------------------------------Navbar2------------------------------------------------------- -->
+        <span class="navbar-brand">Categories:</span>
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if not category %}active{% endif %}">
+              <a class="nav-link" href="{% url "products:list" %}">All
+              </a>
+            </li>
+
+          {% for c in categories  %}
+                <li class="nav-item {% if category.slug == c.slug %}active{% endif %}">
+                    <a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+          {% if user.is_authenticated %}
+                <li class="nav-item">
+              <a class="nav-link" href="{% url "products:adding" %}"><i class="fas fa-edit"></i>
+                  Add
+              </a>
+            </li>
+          {% endif %}
+          </ul>
+          <!-- Links -->
+
+          <!-- search -->
+          <form class="form-inline" action="{% url 'products:search'%}" >
+            <div class="md-form my-0">
+              <input name = "q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
+      <!-----------------------------------------------------/.Navbar2-------------------------------------------------------->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4 img-fluid" style="">
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+
+      <!-----------------------------------------------------------Section1.1------------------------------------------------------------->
+       {% block product %}
+
+           {% endblock %}
+
+       <!-----------------------------------------------------------Section1.1------------------------------------------------------------->
+
+       <!-----------------------------------------------------------Section1.2------------------------------------------------------------->
+
+          <!-----------------------------------------------------------Section2.4------------------------------------------------------------->
+            <!---------------------------------------------------------------------------->
+        </div>
+      <!--Pagination-->
+      <nav class="d-flex justify-content-center wow fadeIn">
+                    <ul class="pagination pg-blue">
+
+                        <!--Arrow left-->
+                    {% if products.has_previous %}
+                        <li class="page-item ">
+
+                            <a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+
+                        </li>
+                    {% endif %}
+    {% for num in products.paginator.page_range %}
+                        {% if products.number == num %}
+                        <li class="page-item active">
+                        <a class="page-link" href="?page={{ products.page_number }}">{{ num }}
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        {% elif num > products.number|add:'-3' and num < products.number|add:'3' %}
+                            <li class="page-item ">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}
+                                <span class="sr-only">(current)</span>
+                            </a>
+
+                        </li>
+                        {% endif %}
+{% endfor %}
+                     {% if products.has_next %}
+                        <li class="page-item">
+
+                            <a class="page-link" href="?page={{ products.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <!--Pagination-->
+        <!--Grid row-->
+      </section>
+      <!--Section: Products v.3-->
+    </div>
+  </main>
+  <!--Main layout-->
+  <!--Footer-->
+{% endblock content%}

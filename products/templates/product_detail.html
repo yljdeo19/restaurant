@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks%}
+{% block content %}
+{% include 'header.html' %}
+  <main class="mt-5 pt-5 text-black">
+    <div class="container dark-grey-text mt-5 white rounded hoverable">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4 mt-4">
+
+          <img src="{{ product.image.url}}" class="img-thumbnail purple-gradient hoverable" alt="Responsive image">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4 border-left border-info ">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{ product.category.name }}</span>
+              </a>
+            </div>
+
+              <p class="lead"><span>{{ product.name }} {{ product.article }}</span></p>
+            <p class="lead">
+
+              <span>{{ product.price }}₸</span>
+
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{ product.description }}</p>
+
+            {% comment %} <form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+
+            </form> {% endcomment %}
+              <form action="{% url "cart:cart_add" product.id %}" method="post" >
+                    {% csrf_token %}
+
+                        {% render_field cart_product_form.quantity class="browser-default custom-select w-auto"  %}
+
+
+            <button class="btn btn-primary btn-md my-0 p">
+                Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </button>
+    <a href="{% url 'cart:cart_remove' product.id %}" class="btn btn-danger btn-md my-0 p">
+              Remove from cart
+            </a>
+                  </form>
+
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+         </div>
+      <hr>
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">Additional information</h4>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+            voluptates,
+            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+    <div class="container dark-grey-text">
+      <!--Grid row-->
+      <div class="row wow fadeIn dark-grey-text">
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+
+          <img src="{{ product.image.url }}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="{{ product.image.url }}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="{{ product.image.url }}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+    </div>
+
+  </main>
+             <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+<!-- jQuery !-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>// Material Select Initialization
+$(document).ready(function() {
+$('.mdb-select').materialSelect();
+});</script>
+{% endblock content %}

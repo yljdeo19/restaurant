@@ -1,0 +1,47 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+
+<h1>Resume Change</h1>
+    <div class="col-lg-3 col-md-6 mb-4" style="transform: translate(0px, 100px);">
+            <!--Card-->
+            <div class="card" >
+            <form class="decor" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                {{ form.category }}
+                <h5>
+                  <strong>
+                    {{ form.name}}
+                  </strong>
+                </h5>
+                <h4 class="font-weight-bold blue-text">
+                  <strong>
+                      {{ form.description }}
+                  </strong>
+                </h4>
+                  <h4 class="font-weight-bold blue-text">
+                  <strong>
+                      {{ form.image }}
+                  </strong>
+                </h4>
+                   <h4 class="font-weight-bold blue-text">
+                  <strong>
+                      {{ form.price }}
+                  </strong>
+                </h4>
+                   <h4 class="font-weight-bold blue-text">
+                  <strong>
+                      {{ form.is_active }}
+                  </strong>
+                </h4>
+              </div>
+              <!--Card content-->
+                <a href="{% url 'products:list'%}"> <button type="submit" class="btn btn-red">Edit</button>&nbsp;</a>
+            </form>
+            </div>
+            <!--Card-->
+          </div>
+
+ {% endblock %}
